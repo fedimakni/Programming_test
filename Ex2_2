@@ -1,0 +1,36 @@
+clc
+clear all
+close all
+% Read an image
+testim = imread('peppers.png');
+% turn the image into a grayscale
+I = rgb2gray(testim);
+% get the width and the height of the image
+[width,height]=size(I);
+for i = 2:width-1
+    for j = 2:height-1
+        % store the value of the pixel
+        L = I(i,j);
+         % store the averege value of the surrounding nine pixels
+        %m = (I(i-1,j-1)+I(i-1,j)+I(i-1,j+1)+I(i,j+1)+I(i,j-1)+I(i+1,j-1)+I(i+1,j+1)+I(i+1,j)+I(i,j))/9;
+        m = mean2(I(i-1:i+1,j-1:j+1));
+        % test if it is too different
+        if(L > m + 10) | (L < m - 10)
+            % create a vector containing the nine pixels values
+            V = [I(i-1,j-1) ;I(i-1,j); I(i-1,j+1); I(i,j+1); I(i,j-1); I(i+1,j-1); I(i+1,j+1); I(i+1,j); I(i,j)];
+            % sort the vector
+            sort(V);
+            V1 = 0;
+            for k = 3:7
+                V1 = V1 + V(k);
+            end
+             %replace the original brightness with the average of the 5 pixels left after
+             %removing Two pixels with lower brightness. Two pixels with the higher brightness.
+            I(i,j) = V1/5;
+        end
+        
+    end
+end
+% display the image after the process
+figure
+imshow(I)
