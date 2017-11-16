@@ -1,0 +1,20 @@
+clc
+clear all
+close all
+%%% define the width and the height of the image
+width = 50;
+height = 50;
+    
+for i = 1:width
+    for j = 1:height
+%%% if j pair so it's white
+        if mod(j,2) == 0
+    A(i,j) = 255;
+        else
+%%% else black
+            A(i,j) = 0;
+        end
+    end
+end
+%%% display the image
+subimage(A);
