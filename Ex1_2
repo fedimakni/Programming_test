@@ -1,0 +1,29 @@
+clc
+clear all
+close all
+% define the number of row and column
+Nrow = 50;
+Ncol = 50;
+% initialize a matrix A with the number of column and row defined
+A = ones(Nrow,Ncol);
+% define a step to increase the brightness in the for loop
+step = 3.14/2/Nrow;
+% define the first pixel value
+A(1,1) = 0;
+for i = 1:Nrow-1
+    for j =1:Ncol-1
+        % set white pixel when i and j pair
+        if mod(i,2) == 0 & mod(j,2) == 0
+            A(i,j) = 1;
+        else
+            % fill the matrix with a cosine wave of brightness
+            if(i>=j)
+            A(i,j) = 1-cos((i-1)*step);
+            else
+            A(i,j) = 1-cos((j-1)*step);
+            end
+        end
+    end
+end
+% display the image
+subimage(A);
