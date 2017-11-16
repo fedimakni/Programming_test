@@ -1,0 +1,12 @@
+Both programs are a simple linear filter that used to reduce the amount of intensity
+variation between one pixel and the next. They are often used to reduce noise in images.
+They are also very easy to implement.
+
+The program in Question 2-1 is faster than the program in Question 2-2 but it is not
+precise as it only takes the four pixels (up, bottom, right, left) and the four corner
+pixels are not used in the decision.
+
+The program in Question 2-2 is very precise it uses the nine pixels (including the pixel itself)
+in the decision but both of them preserve edges, meaning after applying the filter
+the location of edges in your image will move. They don’t preserve details of image.
+Some details are removed using these filters.
