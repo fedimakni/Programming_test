@@ -1,0 +1,26 @@
+clc
+clear all
+close all
+% Read an image
+testim = imread('peppers.png');
+% turn the image into a grayscale
+I = rgb2gray(testim);
+% get the width and the height of the image
+[width,height]=size(I);
+for i = 2:width-1
+    for j = 2:height-1
+        % store the value of the pixel
+        L = I(i,j);
+        % store the value of the surrounding four pixels(up, bottom, right,left) averege brightness
+        m = (I(i-1,j)+I(i,j-1)+I(i+1,j)+I(i,j+1))/4;
+        % test if it is too different
+        if(L > m + 10) | (L < m + 10)
+            % replace the its original brightness with the average brightness of the surrounding four pixel.
+            I(i,j) = m;
+        end
+        
+    end
+end
+% display the image
+figure
+imshow(I)
